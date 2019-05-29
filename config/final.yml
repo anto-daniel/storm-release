@@ -1,1 +1,6 @@
-name: storm
+---
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/blocker-blobs
+final_name: storm

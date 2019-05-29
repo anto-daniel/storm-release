@@ -1,7 +1,9 @@
 ---
 name: storm
 
-dependencies: []
+dependencies:
+- openjdk-8
+- python-2.7
 
 files:
 - storm/apache-storm-1.1.1.zip
