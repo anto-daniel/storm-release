@@ -11,7 +11,7 @@ git clone https://github.com/bosh-packages/python-release.git ~/workspace/bosh-p
 ```
 cd storm-release
 bosh vendor-package openjdk-8 ~/workspace/bosh-packages/java-release
-bosh vendor-package ~/workspace/bosh-packages/python-release
+bosh vendor-package python-2.7 ~/workspace/bosh-packages/python-release
 ./prepare
 bosh -n create-release --force
 bosh -n upload-release
