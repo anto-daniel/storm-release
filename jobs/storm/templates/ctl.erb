@@ -2,7 +2,6 @@
 
 set -e
 
-source /var/vcap/packages/openjdk-8/bosh/runtime.env
 
 export STMCFGDIR=/var/vcap/jobs/storm/config
 export STM_LOG_DIR=/var/vcap/sys/log/storm
@@ -11,6 +10,8 @@ export LOG_DIR=/var/vcap/sys/log/storm
 export RUN_DIR=/var/vcap/sys/run/storm
 export PIDFILE=/var/vcap/sys/run/storm/pid
 export TMPDIR=/var/vcap/data/storm/tmp
+
+source /var/vcap/packages/openjdk-8/bosh/runtime.env
 source /var/vcap/packages/python-2.7/bosh/compile.env
 
 case $1 in
