@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -e
+
+source /var/vcap/packages/openjdk-8/bosh/runtime.env
+
+export STMCFGDIR=/var/vcap/jobs/storm/config
+export STM_LOG_DIR=/var/vcap/sys/log/storm
+
+export LOG_DIR=/var/vcap/sys/log/storm
+export RUN_DIR=/var/vcap/sys/run/storm
+export PIDFILE=/var/vcap/sys/run/storm/pid
+export TMPDIR=/var/vcap/data/storm/tmp
+source /var/vcap/packages/python-2.7/bosh/compile.env
+
+case $1 in
+
+  start)
+    mkdir -p $LOG_DIR $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR $RUN_DIR
+
+    echo $$ > $PIDFILE
+
+    exec chpst -u vcap:vcap /var/vcap/packages/storm/bin/storm nimbus >>/var/vcap/sys/log/storm/stdout.log 2>>/var/vcap/sys/log/storm/stderr.log
+    ;;
+
+  stop)
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0

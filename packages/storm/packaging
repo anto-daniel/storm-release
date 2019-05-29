@@ -1,0 +1,5 @@
+set -e
+
+echo "Extracting Storm..."
+unzip -d ${BOSH_COMPILE_TARGET}/storm/apache-storm-1.1.1.zip
+cp -a ${BOSH_COMPILE_TARGET}/apache-storm-1.1.1/* ${BOSH_INSTALL_TARGET}/
