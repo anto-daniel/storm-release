@@ -14,3 +14,4 @@ releases/**/*.tgz
 *#
 #*
 src/storm/apache-storm-1.1.1.zip
+logs/*
