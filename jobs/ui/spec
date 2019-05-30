@@ -1,0 +1,11 @@
+---
+name: ui
+
+templates:
+  ctl.erb: bin/ctl
+
+packages:
+- openjdk-8
+- python-2.7
+- storm
+

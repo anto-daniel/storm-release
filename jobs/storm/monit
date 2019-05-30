@@ -1,5 +1,0 @@
-check process storm
-    with pidfile /var/vcap/sys/run/storm/storm.pid
-    start program "/bin/bash /var/vcap/jobs/storm/bin/ctl start"
-    stop program "/bin/bash /var/vcap/jobs/storm/bin/ctl stop"
-    group vcap

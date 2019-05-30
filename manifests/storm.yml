@@ -12,11 +12,13 @@ instance_groups:
   networks: 
   - name: default
   jobs:
-  - name: storm
+  - name: nimbus
     release: storm
-    instances: 1
     properties:
       zookeeper_host: 10.244.0.4 
+    instances: 1
+  - name: ui
+    release: storm
 
 stemcells:
 - alias: default

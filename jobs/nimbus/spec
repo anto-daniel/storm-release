@@ -1,5 +1,5 @@
 ---
-name: storm
+name: nimbus
 
 templates:
   ctl.erb: bin/ctl

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+
+export STM_LOG_DIR=/var/vcap/sys/log/ui
+export STM_LOCAL_DIR=/var/vcap/store/ui
+
+export LOG_DIR=/var/vcap/sys/log/ui
+export RUN_DIR=/var/vcap/sys/run/ui
+export PIDFILE=/var/vcap/sys/run/storm/ui.pid
+export TMPDIR=/var/vcap/data/storm/tmp
+
+source /var/vcap/packages/openjdk-8/bosh/compile.env
+source /var/vcap/packages/python-2.7/bosh/compile.env
+
+if [ ! -f /usr/bin/python ]; then ln -s /var/vcap/packages/python-2.7/bin/python /usr/bin/python; fi
+
+case $1 in
+
+  start)
+    mkdir -p $LOG_DIR $RUN_DIR $STM_LOCAL_DIR
+    chown -R vcap:vcap $LOG_DIR $RUN_DIR $STM_LOCAL_DIR $STM_LOG_DIR
+
+    echo $$ > $PIDFILE
+    #cp -rf /var/vcap/jobs/ui/config/storm.yaml /var/vcap/packages/storm/conf/
+    exec /var/vcap/packages/storm/bin/storm ui >>/var/vcap/sys/log/ui/ui-stdout.log 2>>/var/vcap/sys/log/ui/ui-stderr.log
+    ;;
+
+  stop)
+    if [ -f $PIDFILE ]; then
+      kill -9 `cat $PIDFILE` || true
+      rm -f $PIDFILE
+    fi
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0
