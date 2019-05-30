@@ -3,11 +3,11 @@ name: storm
 
 templates:
   ctl.erb: bin/ctl
-  pre-start.erb: bin/pre-start
   storm.yaml.erb: config/storm.yaml
 
 packages:
 - openjdk-8
+- python-2.7
 - storm
 
 properties:

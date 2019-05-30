@@ -5,23 +5,26 @@ set -e
 
 export STMCFGDIR=/var/vcap/jobs/storm/config
 export STM_LOG_DIR=/var/vcap/sys/log/storm
+export STM_LOCAL_DIR=/var/vcap/store/storm
 
 export LOG_DIR=/var/vcap/sys/log/storm
 export RUN_DIR=/var/vcap/sys/run/storm
-export PIDFILE=/var/vcap/sys/run/storm/pid
+export PIDFILE=/var/vcap/sys/run/storm/storm.pid
 export TMPDIR=/var/vcap/data/storm/tmp
 
 source /var/vcap/packages/openjdk-8/bosh/runtime.env
 source /var/vcap/packages/python-2.7/bosh/compile.env
+source /var/vcap/packages/python-2.7/bosh/runtime.env
+ln -s /usr/bin/python3.5 /usr/bin/python
 
 case $1 in
 
   start)
-    mkdir -p $LOG_DIR $RUN_DIR
-    chown -R vcap:vcap $LOG_DIR $RUN_DIR
+    mkdir -p $LOG_DIR $RUN_DIR $STM_LOCAL_DIR
+    chown -R vcap:vcap $LOG_DIR $RUN_DIR $STM_LOCAL_DIR
 
     echo $$ > $PIDFILE
-
+    cp -rf /var/vcap/jobs/storm/config/storm.yaml /var/vcap/packages/storm/conf/
     exec chpst -u vcap:vcap /var/vcap/packages/storm/bin/storm nimbus >>/var/vcap/sys/log/storm/stdout.log 2>>/var/vcap/sys/log/storm/stderr.log
     ;;
 

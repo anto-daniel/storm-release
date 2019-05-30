@@ -3,8 +3,8 @@
 
 * Steps to deploy:
 ```
-git clone https://github.com/bosh-packages/java-release.git ~/workspace/bosh-packages/
-git clone https://github.com/bosh-packages/python-release.git ~/workspace/bosh-packages/
+git clone https://github.com/bosh-packages/java-release.git ~/workspace/bosh-packages/java-release
+git clone https://github.com/bosh-packages/python-release.git ~/workspace/bosh-packages/python-release
 ```
 
 * Clone this repo and Go to this storm-release directory and execute below commands
