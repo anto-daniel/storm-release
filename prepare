@@ -2,5 +2,5 @@
 
 mkdir -p src/storm
 wget https://archive.apache.org/dist/storm/apache-storm-1.1.1/apache-storm-1.1.1.zip -P src/storm
-if [ $? -ne 0 ]; then echo unable to download; fi
+if [ $? -ne 0 ]; then echo unable to download; exit 1;fi
 echo Download Completed . . .
